@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="790.0" prefWidth="1417.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.control.vue.commande1controller">
+   <children>
+      <AnchorPane layoutX="1.0" prefHeight="790.0" prefWidth="1419.0">
+         <children>
+            <Pane layoutY="-20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="790.0" prefWidth="1453.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="-20.0">
+               <children>
+                  <Label layoutX="152.0" layoutY="209.0" prefHeight="32.0" prefWidth="257.0" text="INFORMATION ARTICLE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="165.0" layoutY="308.0" prefHeight="34.0" prefWidth="217.0" text="QUANTITE ARTICLE">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="144.0" layoutY="529.0" prefHeight="32.0" prefWidth="238.0" text="INFORMATION CLIENT">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="29.0" layoutY="31.0" prefHeight="132.0" prefWidth="468.0" text="ARTICLE A COMMANDE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="Code1" layoutX="24.0" layoutY="241.0" prefHeight="38.0" prefWidth="468.0">
+                     <opaqueInsets>
+                        <Insets top="5.0" />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="17.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="Quantite1" layoutX="21.0" layoutY="342.0" prefHeight="38.0" prefWidth="468.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="Code_Client" layoutX="24.0" layoutY="572.0" prefHeight="38.0" prefWidth="468.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font></JFXTextField>
+                  <JFXButton layoutX="112.0" layoutY="421.0" onAction="#Ajouter_Panier" prefHeight="47.0" prefWidth="168.0" ripplerFill="#dde2e4" style="-fx-background-color: #23d08b;" text="AJOUTER" textFill="#eeebeb">
+                     <font>
+                        <Font name="Baskerville Old Face" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="321.0" layoutY="421.0" prefHeight="47.0" prefWidth="168.0" ripplerFill="#dde2e4" style="-fx-background-color: #f14343;" text="ANNULER" textFill="#eeebeb">
+                     <font>
+                        <Font name="Baskerville Old Face" size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <Separator layoutX="507.0" layoutY="14.0" orientation="VERTICAL" prefHeight="799.0" prefWidth="16.0" />
+                  <Separator layoutX="514.0" layoutY="158.0" prefHeight="16.0" prefWidth="895.0" />
+                  <Separator layoutX="573.0" layoutY="164.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="6.0" />
+                  <TableView fx:id="commande_table" layoutX="576.0" layoutY="164.0" prefHeight="549.0" prefWidth="840.0">
+                    <columns>
+                      <TableColumn fx:id="Code" prefWidth="126.0" text="CODE" />
+                      <TableColumn fx:id="Code_Categorie" prefWidth="137.0" text="CODE CATEGORIE" />
+                        <TableColumn fx:id="Designation" prefWidth="169.0" text="DESIGNATION" />
+                        <TableColumn fx:id="Quantite" prefWidth="123.0" text="QUANTITE" />
+                        <TableColumn fx:id="Prix_Unitaire" prefWidth="138.0" text="PRIX UNITAIRE" />
+                        <TableColumn fx:id="Total_montant" prefWidth="143.0" text="MONTANT_TTC" />
+                    </columns>
+                  </TableView>
+                  <ImageView accessibleText="vvvnnv" fitHeight="32.0" fitWidth="193.0" layoutX="1364.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../png/logo.contrast-white_scale-80.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="1237.0" layoutY="106.0" prefHeight="35.0" prefWidth="127.0" text="RECHERCHE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="champ" layoutX="1036.0" layoutY="111.0" prefHeight="25.0" prefWidth="190.0" />
+                  <Label fx:id="Montant_Affichage" layoutX="573.0" layoutY="107.0" prefHeight="56.0" prefWidth="460.0" style="-fx-background-color: #23d08b;" text="INFORMATION SUR LES DIFFERENTS OPERATIONS" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <ButtonBar layoutX="585.0" layoutY="727.0" prefHeight="56.0" prefWidth="667.0">
+                     <buttons>
+                        <JFXButton onAction="#Passer_commande" prefHeight="55.0" prefWidth="237.0" style="-fx-background-color: #23d08b;" text="PASSER COMMANDE" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="499.0" layoutY="18.0" onAction="#Suppression_Article_Panier" prefHeight="55.0" style="-fx-background-color: #23d08b;" text="ANNULER UNE COMMANDE" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="499.0" layoutY="18.0" onAction="#Suppression_toute_commande" prefHeight="56.0" style="-fx-background-color: #f14343;" text="ANNULER TOUTES LES COMMANDES" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                     </buttons>
+                  </ButtonBar>
+                  
+                  <Separator layoutX="6.0" layoutY="160.0" prefHeight="12.0" prefWidth="514.0" />
+                  <JFXComboBox fx:id="combobox" layoutX="25.0" layoutY="643.0" prefHeight="47.0" prefWidth="341.0" promptText="MODE DE REGLEMENT" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
