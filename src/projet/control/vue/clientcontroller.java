@@ -1,34 +1,29 @@
 package projet.control.vue;
 
-import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javax.xml.crypto.dsig.spec.HMACParameterSpec;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import org.controlsfx.control.textfield.TextFields;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import projet.control.metier.Client;
 import projet.control.metier.Connection_Base;
@@ -62,8 +57,6 @@ public class clientcontroller implements Initializable {
 	@FXML
 	private TextField prenom;
 	
-	@FXML
-	private TextField code_postale;
 	
 	@FXML
 	private TextField addresse;
@@ -83,8 +76,6 @@ public class clientcontroller implements Initializable {
 	@FXML
 	private TextArea remarques;
 	
-	@FXML
-	private TextField telephone;
 	
 	@FXML
 	private String code;
@@ -122,6 +113,7 @@ public class clientcontroller implements Initializable {
 	
 	
 
+	//methode d'enregistrement du client
 	@FXML
 	private void handleConnection()
 	{
@@ -129,9 +121,12 @@ public class clientcontroller implements Initializable {
 		 String mot = "";
 		 String fidelite="";
 		 
-		for(Entry<String, Client> article2:liste_Client.entrySet())
+		 
+		for(Entry<String, Client> client2:liste_Client.entrySet())
 		{
-			if(article2.getValue().getEmail().equals(email.getText()) || article2.getValue().getEmail().equals(tel_fixe.getText()))
+			System.out.println(client2.getValue().getEmail()+"  "+client2.getValue().getTel_fixe()+"\n");
+			System.out.println(email.getText()+"  "+tel_fixe.getText());
+			if(client2.getValue().getEmail().equals(email.getText()) || client2.getValue().getTel_fixe().equals(tel_fixe.getText()))
 			{
 				verification_individualiter=true;
 			}
@@ -151,34 +146,19 @@ public class clientcontroller implements Initializable {
 			  
 			if(verification_individualiter==true )
 			{
-				information.setText("Cet addresse email est deja utilisé ");
+				information.setText("Cet addresse email ou cet numero est deja utilisé  ");
 				information.setVisible(true);
 			}else
 			{
 				new Client().creerCRUD("CL"+getI(), nom.getText(), prenom.getText(),carte,addresse.getText() , code_postal.getText(), ville.getText(), tel_fixe.getText(), " ", email.getText(), remarques.getText());
 				
 				
-				Document documentinscription=new Document();
-				try 
-				{
-					PdfWriter.getInstance(documentinscription, new FileOutputStream("C:\\Users\\MABSON\\eclipse-workspace\\ESSAI\\inscription\\"+mot+".pdf"));
-					documentinscription.open();
-					documentinscription.add(new Paragraph("CODE: "+mot+""));
-					documentinscription.add(new Paragraph("NOM: "+nom.getText().toUpperCase()+""));
-					documentinscription.add(new Paragraph("PRENOM: "+prenom.getText().toUpperCase()+""));
-					documentinscription.add(new Paragraph("Email: "+email.getText()+""));
-					documentinscription.add(new Paragraph("CARTE FIDELITE: "+fidelite+""));
-					documentinscription.add(new Paragraph("Cet document doit etre concerver avec soins,les informations sont confidentiel"));
-					Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler "+"C:\\Users\\MABSON\\eclipse-workspace\\ESSAI\\inscription\\"+mot+".pdf");
-				} catch (Exception e) {
-					
-				}
-				documentinscription.close();
 				
 				nom.setText("");prenom.setText("");addresse.setText("");code_postal.setText("");email.setText("");ville.setText("");remarques.setText("");tel_fixe.setText("");carte_fidelite.setSelected(false);	
 			
 				information.setText("Enregistrement effectué avec succès ");
 				information.setVisible(true);
+				
 			}
 			
 			
@@ -189,10 +169,26 @@ public class clientcontroller implements Initializable {
 			information.setText("Veuillez remplir correctement tous les champs");
 			information.setVisible(true);
 		}
+		liste_Client=new Client().liste_Client();
 		
-		
+		initialisation();
 		
 	}
+	public void initialisation()
+	{
+		String[] client=new String[liste_Client.size()];
+		int compteur=0;
+		
+		for(Entry<String,Client>clienti:liste_Client.entrySet())
+		{
+			client[compteur]=clienti.getValue().getCode()+"     "+clienti.getValue().getNom()+"     "+clienti.getValue().getPrenom()+"     "+clienti.getValue().getTel_fixe();
+			compteur+=1;
+		}
+		
+		TextFields.bindAutoCompletion(Recherche_Client, client);
+	}
+	
+	//methode de remise a niveau de champ de saisie
 
 	@FXML
 	public void Annuler_Insertion_Client()
@@ -208,9 +204,135 @@ public class clientcontroller implements Initializable {
 		carte_fidelite.setSelected(false);
 	}
 	
-	public void iniCLient(Client cliente)
+	
+	
+
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+	
+	
+	
+	
+	//methode de modification du client
+	@FXML
+	private void modification()
+	{
+		int code1=0;
+		int indexligne=clientTable.getSelectionModel().getSelectedIndex();
+		if(carte_fidelite.isSelected())
+		{
+			code1=1;
+		}else
+		{
+			code1=0;
+		}
+		
+		String  mot1=Recherche_Client.getText();
+		System.out.println(mot1);
+		String code_client="";
+		for(int o = 0;o<mot1.length();o++)
+		{
+			if(mot1.charAt(o)==' ')
+			{
+				break;
+			}else
+			{
+				code_client+=mot1.charAt(o);
+			}
+		}
+		//System.out.println(liste_Client.get(code_client).getCode());
+		if(liste_Client.containsKey(code_client)||liste_Client.containsKey(code) )
+		{
+			new Client().modifierCRUD(liste_Client.get(code).getCode(), nom.getText(), prenom.getText(), code1,"2008-02-01", addresse.getText(), code_postal.getText(), ville.getText(), tel_fixe.getText(), "", email.getText(), remarques.getText());
+			 Client client1=new Client(code, nom.getText(), prenom.getText(),false,new Date(), addresse.getText(), "code_postal", ville.getText(), tel_fixe.getText(), "vmobilis", email.getText(), remarques.getText());
+			 clientTable.getItems().set(indexligne, client1);
+			
+			information.setText("Modification effectuée");
+			information.setVisible(true);
+		}
+		else
+		{
+			information.setText("Modification impossible,client non reconnue.");
+			information.setVisible(true);
+		}
+		
+		
+//new Client().modifierCRUD(code, nom.getText(), prenom.getText(), code1,"2008-02-01", addresse.getText(), code_postal.getText(), ville.getText(), tel_fixe.getText(), null, email.getText(), remarques.getText());
+		
+		//int indexligne=clientTable.getSelectionModel().getSelectedIndex();
+		 /*Client client1=new Client(code, nom.getText(), prenom.getText(),false,new Date(), addresse.getText(), "code_postal", ville.getText(), tel_fixe.getText(), "vmobilis", email.getText(), remarques.getText());
+		 clientTable.getItems().set(indexligne, client1);*/
+		
+			liste_Client=new Client().liste_Client();
+		
+		
+			
+	}
+	
+	//methode de suppression de client
+	
+	@FXML
+	private void supprimer_client()
 	{
 		
+		
+		int indexligne=clientTable.getSelectionModel().getSelectedIndex();
+		clientTable.getItems().remove(indexligne);
+		
+		
+		String  mot1=Recherche_Client.getText();
+		String code_client="";
+		for(int o = 0;o<mot1.length();o++)
+		{
+			if(mot1.charAt(o)==' ')
+			{
+				break;
+			}else
+			{
+				code_client+=mot1.charAt(o);
+			}
+		}
+		if(liste_Client.containsKey(code_client) ||liste_Client.containsKey(code) )
+		{
+			Alert alert=new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmation de suppression");
+			alert.setHeaderText("Suppression");
+			alert.setContentText("Etes vous sûre de vouloir supprimer le client");
+			Optional<javafx.scene.control.ButtonType> action=alert.showAndWait();
+			if(action.get()==javafx.scene.control.ButtonType.OK)
+			{
+				boolean verif=new Client().supprimerCRUD(code);;
+				if(verif==true)
+				{
+					information.setText("Suppression effectuée.");
+					information.setVisible(true);
+				}else
+				{
+					information.setText("Suppression impossible,probleme rencontré.");
+					information.setVisible(true);
+				}
+				
+			}
+			
+		}
+		else
+		{
+			information.setText("Suppression impossible,client non reconnue.");
+			information.setVisible(true);
+		}
+		
+		liste_Client=new Client().liste_Client();
+	}
+	
+	
+	
+	public void iniCLient(Client cliente)
+	{
 		if(cliente !=null) {
 			code=cliente.getCode();
 			nom.setText(cliente.getNom());
@@ -220,9 +342,6 @@ public class clientcontroller implements Initializable {
 			tel_fixe.setText(cliente.getTel_fixe());
 			email.setText(cliente.getEmail());
 			ville.setText(cliente.getVille());
-			remarques.setText(cliente.getRemarques());
-			carte_fidelite.setSelected(cliente.isCarte_fidelité());
-			
 			
 		}else
 		{
@@ -238,21 +357,16 @@ public class clientcontroller implements Initializable {
 		}
 		
 	}
+
 	
-
-	public int getI() {
-		return i;
-	}
-
-	public void setI(int i) {
-		this.i = i;
-	}
 	
 	
 	@FXML
 	private void tableau_client()
 	{
-		
+		for (Client client : new Client().getLesEnreg()) {
+			ClientData.add(client);
+		}
 		
 		NOM.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
 		PRENOM.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
@@ -266,64 +380,122 @@ public class clientcontroller implements Initializable {
 		
 		
 		clientTable.getSelectionModel().selectedItemProperty().addListener(
-				 (observable, oldValue, newValue) -> iniCLient(newValue));	
-		
-		liste=new Client().liste_Cliente();
-	    ClientData=FXCollections.observableArrayList(liste);
+				 (observable, oldValue, newValue) -> iniCLient(newValue));		
 	}
 	
 	
 	
-	@FXML
-	private void modification()
-	{
-		int code1=0;
-		if(carte_fidelite.isSelected())
-		{
-			code1=1;
-		}else
-		{
-			code1=0;
-		}
-		
-		new Client().modifierCRUD(code, nom.getText(), prenom.getText(), code1,"2008-02-01", addresse.getText(), code_postal.getText(), ville.getText(), tel_fixe.getText(), "", email.getText(), remarques.getText());
-		
-		int indexligne=clientTable.getSelectionModel().getSelectedIndex();
-		 Client client1=new Client(code, nom.getText(), prenom.getText(),false,new Date(), addresse.getText(), "code_postal", ville.getText(), tel_fixe.getText(), "vmobilis", email.getText(), remarques.getText());
-		 clientTable.getItems().set(indexligne, client1);
-			
-	}
+	
+	
+	
 	
 	//methode de suppression de client
 	
 	@FXML
-	private void supprimer_client()
+	private void supprimer_client1()
 	{
 		int indexligne=clientTable.getSelectionModel().getSelectedIndex();
 		clientTable.getItems().remove(indexligne);
 		new Client().supprimerCRUD(code);
 		
 	}
-	
-	@FXML
-	private void impression()
-	{
-		Document documentinscription=new Document();
-		try 
-		{
-			PdfWriter.getInstance(documentinscription, new FileOutputStream("C:\\Users\\MABSON\\eclipse-workspace\\ESSAI\\inscription\\leo.pdf"));
-			documentinscription.open();
-			documentinscription.add(new Paragraph("bonjour"));
-			
-		} catch (Exception e) {
-			
-		}
-		documentinscription.close();
-	}
 
+	
+	
+	
+	
+
+	
+
+	//methode initialisation au demarrage
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
+		
+		
 		information.setVisible(false);
+		informationlabel.setVisible(false);
+		
+		String[] client=new String[liste_Client.size()];
+		int compteur=0;
+		
+		for(Entry<String,Client>clienti:liste_Client.entrySet())
+		{
+			client[compteur]=clienti.getValue().getCode()+"     "+clienti.getValue().getNom()+"     "+clienti.getValue().getPrenom()+"     "+clienti.getValue().getTel_fixe();
+			compteur+=1;
+		}
+		
+		TextFields.bindAutoCompletion(Recherche_Client, client);
+		
+		Recherche_Client.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
+
+			@Override
+			public void handle(javafx.scene.input.KeyEvent keyev) {
+				
+				
+				
+				if(keyev.getCode().toString().equals("ENTER") && !Recherche_Client.getText().equals(""))
+				{
+					String mot1=Recherche_Client.getText();
+					String code_client="";
+					for(int o = 0;o<mot1.length();o++)
+					{
+						if(mot1.charAt(o)==' ')
+						{
+							break;
+						}else
+						{
+							code_client+=mot1.charAt(o);
+						}
+					}
+					
+					if(liste_Client.containsKey(code_client))
+					{
+						code=liste_Client.get(code_client).getCode();
+						nom.setText(liste_Client.get(code_client).getNom());
+						prenom.setText(liste_Client.get(code_client).getPrenom());
+						addresse.setText(liste_Client.get(code_client).getAdresse());
+						code_postal.setText(liste_Client.get(code_client).getCode_postal());
+						tel_fixe.setText(liste_Client.get(code_client).getTel_fixe());
+						email.setText(liste_Client.get(code_client).getEmail());
+						ville.setText(liste_Client.get(code_client).getVille());
+						remarques.setText(liste_Client.get(code_client).getRemarques());
+						carte_fidelite.setSelected(liste_Client.get(code_client).isCarte_fidelité());
+						informationlabel.setText("    "+liste_Client.get(code_client).getCode());
+						informationlabel.setVisible(true);
+					}
+					else
+					{
+						information.setText("AUCUN RESULTAT");
+						information.setVisible(true);
+					}
+				}
+				
+				if(!keyev.getCode().toString().equals("ENTER"))
+				{
+					information.setVisible(false);
+				}
+			}
+		});
+		
+		
+		
+		for (Client client1 : new Client().getLesEnreg()) {
+			ClientData.add(client1);
+		}
+		
+		NOM.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
+		PRENOM.setCellValueFactory(cellData -> cellData.getValue().prenomProperty());
+		ADRESSE.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
+		TELEPHONE.setCellValueFactory(cellData -> cellData.getValue().Tel_fixeProperty());
+		EMAIL.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+		VILLE.setCellValueFactory(cellData -> cellData.getValue().villeProperty());
+		
+		clientTable.setItems(ClientData);
+		
+		
+		
+		clientTable.getSelectionModel().selectedItemProperty().addListener(
+				 (observable, oldValue, newValue) -> iniCLient(newValue));
 		
 	}
 	

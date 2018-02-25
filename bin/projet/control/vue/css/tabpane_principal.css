@@ -1,0 +1,50 @@
+#principaltabpane{
+	-fx-tab-min-height: 12em;
+	-fx-tab-max-height:12em;
+	-fx-tab-min-width:9em;
+	-fx-tab-max-width:9em;
+	-fx-border-width:2 2 0 2;
+	-fx-border-color:rgb(0,128,128);
+}
+
+
+
+.tab{
+	-fx-background-insets:0.0 ;
+	-fx-background-radius:0.0 ;
+	-fx-padding:0;
+	-fx-background-color:transparent;
+	-fx-pref-width:100;
+	
+}
+
+.tab:hover{
+	-fx-padding:0;
+	-fx-background-insets:0.0 ;
+	-fx-background-radius:0.0 ;
+	-fx-background-color:rgb(0,128,128);
+}
+
+.tab:hover .button:hover{
+	-fx-pref-height:2em;
+}
+
+.tab:hover .button:hover .glyph-icon{
+	-glyph-size:30px;
+	-fx-fill:rgb(128,0,0);
+}
+
+.tab:hover .glyph-icon, .tab:selected .glyph-icon{
+	-glyph-size:30px;
+	-fx-fill:rgb(128,0,0);
+}
+.tab:selected .glyph-icon{
+	-glyph-size:30px;
+}
+
+.tab:selected{
+	-fx-background-color:rgb(0,128,128,0.7);
+	
+}
+
+

@@ -25,6 +25,9 @@ public class statistiquecontroller {
 	@FXML
 	private void initialize()
 	{
+		String[] month=DateFormatSymbols.getInstance(Locale.FRANCE).getMonths();
+		mois.addAll(Arrays.asList(month));
+		xAxis.setCategories(mois);
 	}
 	
 	@FXML

@@ -1,23 +1,14 @@
 package projet.control.vue;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import projet.control.metier.Categorie;
 
-public class categoriecontroller implements Initializable{
+public class categoriecontroller {
 
 	@FXML
 	private TextField code;
@@ -26,12 +17,6 @@ public class categoriecontroller implements Initializable{
 	private TextField designation;
 	
 	private Stage primaryStage;
-	
-	@FXML TableView<Categorie> tab_categorie;
-	@FXML TableColumn<String, Categorie>code_tab;
-	@FXML TableColumn<String, Categorie>designation_tab;
-	ArrayList<Categorie>liste=new Categorie().liste_simple_Categorie();
-	ObservableList<Categorie>categorieData=FXCollections.observableArrayList(liste);
 	
 	
 	
@@ -46,28 +31,54 @@ public class categoriecontroller implements Initializable{
 		
 	}
 	
-	@FXML
-	private void insertionCategorie()
+/*	methode d'ajout de categorie
+*/	@FXML
+	private void Handlecategorie()
 	{
-		new Categorie().CreerCategorie(code.getText(), designation.getText());
+		System.out.println("bonjour");
+		try {
+			Class.forName( "com.mysql.jdbc.Driver") ;
+			System.out. println( "Driver O.K. ") ;
+			String url = "jdbc:mysql://localhost:3306/indigo";
+			String user = "root";
+			String passwd = "jospin";
+			Connection conn = DriverManager.getConnection( url, user,
+			passwd) ;
+			
+			Statement statement=conn.createStatement();
+			int i=statement.executeUpdate("insert into categories(code,designation) values ('"+code.getText()+"','"+designation.getText()+"')");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	@FXML
-	private void supprimerCategorie()
-	{
-		new Categorie().supprimerCategorie(code.getText());
-	}
-	
-	@FXML
-	private void modifierCategorie()
-	{
-		new Categorie().ModifierCategorie(code.getText(), designation.getText());
-	}
-
-	@Override
-	public void initialize(URL url, ResourceBundle resource) {
+@FXML
+private void modifcation_categorie()
+{
+	System.out.println("bonjour");
+	try {
+		Class.forName( "com.mysql.jdbc.Driver") ;
+		System.out. println( "Driver O.K. ") ;
+		String url = "jdbc:mysql://localhost:3306/indigo";
+		String user = "root";
+		String passwd = "jospin";
+		Connection conn = DriverManager.getConnection( url, user,
+		passwd) ;
 		
-		//code_tab.setCellValueFactory(cellData ->cellData.getValue().);
+		Statement statement=conn.createStatement();
+		int i=statement.executeUpdate("update categories set designation='"+designation.getText()+"' where code='"+code.getText()+"'");
+		
+	} catch (Exception e) {
+		e.printStackTrace();
 	}
-	
+}
+
+@FXML
+private void remise_a_zero_des_champs()
+{
+	code.setText("");
+	designation.setText("");
+}
+
 }

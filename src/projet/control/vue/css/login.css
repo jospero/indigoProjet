@@ -1,0 +1,16 @@
+#conteneurlogin{
+	-fx-background-color:#333;
+	-fx-text-fill:#FFF;
+}
+
+JFXTextField,JFXPasswordField{
+	-fx-pref-height:50;
+	-fx-border-radius:0;
+	-fx-border-width:0 0 0 0;
+	-fx-border-color:rgb(0,128,128);
+	-fx-text-fill:#FFF;
+}
+
+.button{
+	-fx-border-radius:0;
+}

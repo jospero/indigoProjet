@@ -14,6 +14,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -57,11 +59,20 @@ public class article1controlleur implements Initializable {
 	@FXML
 	private TextField Quantite1;
 	
+	@FXML private ComboBox combobox;
+	
 	@FXML private TextField code;
 	@FXML private TextField  code_categorie;
 	@FXML private TextField quantite;
 	@FXML private TextField prix_unitaire ;
 	@FXML private TextField designation;
+	
+	@FXML private Label codelabel;
+	@FXML private Label  code_categorielabel;
+	@FXML private Label quantitelabel;
+	@FXML private Label prix_unitairelabel ;
+	@FXML private Label designationlabel;
+	
 	
 	private Connection connection=Connection_Base.getconnection();
 	private HashMap<String, Article> liste=new Article().lireRecupCRUD();
@@ -78,22 +89,34 @@ public class article1controlleur implements Initializable {
 	 double total_paye=0;
 	 
 	
+	 //methode permettant l'ajout d'un article
 	@FXML
 	private void ajouter_article()
 	{
-try {
+		if(!code.getText().equals("") && !code_categorie.getText().equals("") && !quantite.getText().equals("") && !prix_unitaire.getText().equals("") && !designation.getText().equals(""))
+		{
 			
-			new Article().creerCRUD(code.getText(), code_categorie.getText(), designation.getText(), Integer.parseInt(quantite.getText()),Double.parseDouble(prix_unitaire.getText()) ,"sfd");
+			try {
+				
+				new Article().creerCRUD(code.getText(), code_categorie.getText(), designation.getText(), Integer.parseInt(quantite.getText()),Double.parseDouble(prix_unitaire.getText()) ,"sfd");
+				
+				code.setText("");
+				code_categorie.setText("");
+				quantite.setText("");
+				prix_unitaire.setText("");
+				designation.setText("");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
-			code.setText("");
-			code_categorie.setText("");
-			quantite.setText("");
-			prix_unitaire.setText("");
-			designation.setText("");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
+		}else
+		{
+			
+		}
+	
 	}
+	
+	//methode permettant la modification d'un article
 	@FXML
 	private void Modifer_article()
 	{
@@ -130,6 +153,8 @@ try {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		//instruction permettant le remplissage du tableau au demarrage
 		for (Entry<String, Article> article1 :liste.entrySet()) 
 		{
 			Article article=new  Article(article1.getValue().getCode(),article1.getValue().getCode_catogorie(),article1.getValue().getDesignation(),article1.getValue().getQuantite(),article1.getValue().getPrix_unitaire(),article1.getValue().getDate());
@@ -147,6 +172,8 @@ try {
 		commande_table.getSelectionModel().selectedItemProperty().addListener(
 				 (observable, oldValue, newValue) -> iniArticle(newValue));	
 		
+		
+		//instruction permettant l'autocompletion dans la barre de recherche 
 		int compteur=0;
 		String[] article1=new String[liste.size()];
 		for(Entry<String, Article> article3:liste.entrySet())
@@ -155,8 +182,12 @@ try {
 			compteur+=1;
 		}
 	TextFields.bindAutoCompletion(Code1, article1).getCompletionTarget();
+	
+	
 		
 	}
+	
+	//methode d'initialisation d'un article
 	public void iniArticle(Article article) {
 		if(article!=null)
 		{
@@ -185,25 +216,29 @@ try {
 	@FXML
 	private void boutonok()
 	{
-		String mot1=Code1.getText();
-		String code_client="";
-		for(int o = 0;o<mot1.length();o++)
+		if(!Code1.getText().equals(""))
 		{
-			if(mot1.charAt(o)==' ')
+			String mot1=Code1.getText();
+			String code_client="";
+			for(int o = 0;o<mot1.length();o++)
 			{
-				break;
-			}else
-			{
-				code_client+=mot1.charAt(o);
+				if(mot1.charAt(o)==' ')
+				{
+					break;
+				}else
+				{
+					code_client+=mot1.charAt(o);
+				}
 			}
-		}
+			
+			code.setText(liste.get(code_client).getCode());
+			code_categorie.setText(liste.get(code_client).getCode_catogorie());
 		
-		code.setText(liste.get(code_client).getCode());
-		code_categorie.setText(liste.get(code_client).getCode_catogorie());
-	
-		designation.setText(liste.get(code_client).getDesignation());
-		prix_unitaire.setText(String.valueOf(liste.get(code_client).getPrix_unitaire()));
-		quantite.setText(String.valueOf(liste.get(code_client).getQuantite()));
+			designation.setText(liste.get(code_client).getDesignation());
+			prix_unitaire.setText(String.valueOf(liste.get(code_client).getPrix_unitaire()));
+			quantite.setText(String.valueOf(liste.get(code_client).getQuantite()));
+		}
+			
 	}
 
 }

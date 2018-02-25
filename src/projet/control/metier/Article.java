@@ -18,12 +18,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Article {
-	private StringProperty code=new SimpleStringProperty();
-	private StringProperty code_catogorie=new SimpleStringProperty();;
-	private StringProperty designation=new SimpleStringProperty();;
-	private IntegerProperty quantite=new SimpleIntegerProperty();
-	private DoubleProperty prix_unitaire = new SimpleDoubleProperty();
-	private DoubleProperty Montan_ttc=new SimpleDoubleProperty();
+	private StringProperty code;
+	private StringProperty code_catogorie;
+	private StringProperty designation;
+	private IntegerProperty quantite;
+	private DoubleProperty prix_unitaire;
+	private DoubleProperty Montan_ttc;
 	private Date date;
 	private static Connection conn=Connection_Base.getconnection();
 	private ArrayList<Article> lesEnreg=new ArrayList<Article>();

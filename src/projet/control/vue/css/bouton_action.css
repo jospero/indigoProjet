@@ -1,0 +1,24 @@
+
+.button{
+	-fx-border-width:2 2 2 2;
+	-fx-border-color:rgb(0,128,128);
+	-fx-border-radius:2 2 2 2;
+	-fx-padding:0.0;
+	-fx-min-height:180;
+	-fx-min-width:135;
+}
+
+.glyph-icon{
+	-fx-fill:rgb(128,0,0);
+	-glyph-size:55px;
+}
+
+ButtonBar{
+	-fx-padding:0 0 0 -20;
+}
+
+Separator{
+	-fx-border-width:1 1 1 1;
+	-fx-border-color:rgb(0,128,128);
+	-fx-background-color:rgb(0,128,128);
+}

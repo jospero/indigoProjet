@@ -18,38 +18,33 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projet.control.vue.article1controlleur">
    <children>
-      <AnchorPane layoutX="1.0" prefHeight="790.0" prefWidth="1532.0">
+      <AnchorPane layoutX="1.0" prefHeight="630.0" prefWidth="1283.0">
          <children>
-            <Pane layoutY="-20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="789.0" prefWidth="763.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-20.0">
+            <Pane layoutY="-20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="630.0" prefWidth="1283.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="101.0" layoutY="236.0" prefHeight="17.0" prefWidth="84.0" text="CODE">
+                  <Label fx:id="codelabel" layoutX="119.0" layoutY="227.0" prefHeight="32.0" prefWidth="64.0" text="CODE">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="290.0" prefHeight="35.0" prefWidth="152.0" text="DESIGNATION">
+                  <Label fx:id="designationlabel" layoutX="43.0" layoutY="291.0" prefHeight="35.0" prefWidth="152.0" text="DESIGNATION">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="6.0" layoutY="361.0" prefHeight="34.0" prefWidth="197.0" text="CODE CATEGORIE">
+                  <Label fx:id="code_categorielabel" layoutX="6.0" layoutY="361.0" prefHeight="34.0" prefWidth="177.0" text="CODE CATEGORIE">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="60.0" layoutY="439.0" prefHeight="34.0" prefWidth="130.0" text="QUANTITE">
+                  <Label fx:id="quantitelabel" layoutX="69.0" layoutY="439.0" prefHeight="34.0" prefWidth="114.0" text="QUANTITE">
                      <font>
                         <Font size="23.0" />
                      </font>
                   </Label>
-                  <Label layoutX="21.0" layoutY="504.0" prefHeight="32.0" prefWidth="161.0" text="PRIX UNITAIRE">
+                  <Label fx:id="prix_unitairelabel" layoutX="35.0" layoutY="501.0" prefHeight="32.0" prefWidth="152.0" text="PRIX UNITAIRE">
                      <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="29.0" layoutY="31.0" prefHeight="132.0" prefWidth="468.0" text="ARTICLE">
-                     <font>
-                        <Font size="25.0" />
+                        <Font name="Arial" size="20.0" />
                      </font>
                   </Label>
                   <JFXTextField fx:id="code" layoutX="187.0" layoutY="214.0" prefHeight="38.0" prefWidth="309.0">
@@ -75,61 +70,62 @@
                      <font>
                         <Font size="17.0" />
                      </font></JFXTextField>
-                  <JFXButton layoutX="119.0" layoutY="603.0" onAction="#ajouter_article" prefHeight="47.0" prefWidth="168.0" ripplerFill="#dde2e4" style="-fx-background-color: #23d08b;" text="AJOUTER" textFill="#eeebeb">
+                  <JFXButton layoutX="119.0" layoutY="569.0" onAction="#ajouter_article" prefHeight="55.0" prefWidth="168.0" ripplerFill="#dde2e4" style="-fx-background-color: #23d08b;" text="AJOUTER" textFill="WHITE">
                      <font>
-                        <Font name="Baskerville Old Face" size="20.0" />
+                        <Font name="Arial Rounded MT Bold" size="23.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="328.0" layoutY="603.0" onAction="#Annuler_insertion" prefHeight="47.0" prefWidth="168.0" ripplerFill="#dde2e4" style="-fx-background-color: #f14343;" text="ANNULER" textFill="#eeebeb">
+                  <JFXButton layoutX="331.0" layoutY="569.0" onAction="#Annuler_insertion" prefHeight="55.0" prefWidth="168.0" ripplerFill="#dde2e4" style="-fx-background-color: #f14343;" text="ANNULER" textFill="#eeebeb">
                      <font>
-                        <Font name="Baskerville Old Face" size="20.0" />
+                        <Font name="Arial Rounded MT Bold" size="20.0" />
                      </font>
                   </JFXButton>
-                  <Separator layoutX="507.0" layoutY="14.0" orientation="VERTICAL" prefHeight="799.0" prefWidth="16.0" />
-                  <Separator layoutX="514.0" layoutY="158.0" prefHeight="16.0" prefWidth="1020.0" />
-                  <Separator layoutX="573.0" layoutY="164.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="6.0" />
-                  <ImageView accessibleText="vvvnnv" fitHeight="32.0" fitWidth="193.0" layoutX="1485.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+                  <Separator layoutX="507.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="630.0" prefWidth="16.0" />
+                  <ImageView accessibleText="vvvnnv" fitHeight="32.0" fitWidth="193.0" layoutX="1220.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../png/logo.contrast-white_scale-80.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="1345.0" layoutY="106.0" prefHeight="32.0" prefWidth="137.0" text="RECHERCHE">
+                  <Label layoutX="1083.0" layoutY="21.0" prefHeight="35.0" prefWidth="137.0" text="RECHERCHE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="Code1" layoutX="980.0" layoutY="109.0" prefHeight="25.0" prefWidth="309.0" />
-                  <Label fx:id="information" layoutX="573.0" layoutY="108.0" prefHeight="55.0" prefWidth="405.0" style="-fx-background-color: #23d08b;" text="INFORMATION SUR LES DIFFERENTS OPERATIONS" textFill="WHITE">
+                  <TextField fx:id="Code1" layoutX="707.0" layoutY="23.0" prefHeight="32.0" prefWidth="309.0">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></TextField>
+                  <Label fx:id="information" layoutX="521.0" layoutY="66.0" prefHeight="47.0" prefWidth="738.0" style="-fx-background-color: #23d08b;" text="INFORMATION SUR LES DIFFERENTS OPERATIONS" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <ButtonBar layoutX="579.0" layoutY="734.0" prefHeight="56.0" prefWidth="555.0">
+                  <ButtonBar layoutX="534.0" layoutY="565.0" prefHeight="56.0" prefWidth="549.0">
                      <buttons>
-                        <JFXButton onAction="#Modifer_article" prefHeight="55.0" prefWidth="237.0" style="-fx-background-color: #23d08b;" text="MODIFIER ARTICLE" textFill="WHITE">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </JFXButton>
                         <JFXButton layoutX="499.0" layoutY="18.0" onAction="#supprimer_Article" prefHeight="56.0" prefWidth="287.0" style="-fx-background-color: #f14343;" text="SUPPRIMER ARTICLE" textFill="WHITE">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="Arial Rounded MT Bold" size="21.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#Modifer_article" prefHeight="55.0" prefWidth="322.0" style="-fx-background-color: #23d08b;" text="MODIFIER ARTICLE" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="22.0" />
                            </font>
                         </JFXButton>
                      </buttons>
                   </ButtonBar>
                
                   <Separator layoutX="6.0" layoutY="160.0" prefHeight="12.0" prefWidth="514.0" />
-                  <TableView fx:id="commande_table" layoutX="573.0" layoutY="170.0" prefHeight="554.0" prefWidth="950.0">
+                  <TableView fx:id="commande_table" layoutX="520.0" layoutY="115.0">
                     <columns>
                       <TableColumn fx:id="Code" prefWidth="132.0" text="CODE" />
-                      <TableColumn fx:id="Code_Categorie" prefWidth="157.0" text="CODE CATEGORIE" />
-                        <TableColumn fx:id="Designation" prefWidth="274.0" text="DESIGNATION" />
-                        <TableColumn fx:id="Quantite" prefWidth="179.0" text="QUANTITE" />
-                        <TableColumn fx:id="Prix_Unitaire" prefWidth="205.0" text="PRIX UNITAIRE" />
+                      <TableColumn fx:id="Code_Categorie" prefWidth="137.0" text="CODE CATEGORIE" />
+                        <TableColumn fx:id="Designation" prefWidth="182.0" text="DESIGNATION" />
+                        <TableColumn fx:id="Quantite" minWidth="5.0" prefWidth="114.0" text="QUANTITE" />
+                        <TableColumn fx:id="Prix_Unitaire" prefWidth="177.0" text="PRIX UNITAIRE" />
                     </columns>
                   </TableView>
-                  <Button layoutX="1289.0" layoutY="105.0" mnemonicParsing="false" onAction="#boutonok" prefHeight="32.0" prefWidth="52.0" text="OK" textFill="WHITE" />
+                  <Button layoutX="1024.0" layoutY="23.0" mnemonicParsing="false" onAction="#boutonok" prefHeight="32.0" prefWidth="52.0" text="OK" textFill="WHITE" />
                </children>
             </Pane>
          </children>

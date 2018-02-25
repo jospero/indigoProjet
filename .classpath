@@ -3,20 +3,22 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/controlsfx-8.40.11.jar" sourcepath="src/projet/control/vue/controlsfx-8.40.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/controlsfx-8.40.9-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext7-7.0.2/itext7-pdfa-7.0.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/.p2/pool/plugins/org.eclipse.m2e.archetype.common_1.8.2.20171007-0216/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itextpdf-5.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itextpdf-5.5.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itextpdf-5.5.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itext-pdfa-5.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itext-pdfa-5.5.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itext-pdfa-5.5.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itext-xtra-5.5.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itext-xtra-5.5.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/itext-5.5.3/itext-xtra-5.5.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/MABSON/Downloads/Compressed/com.mysql.jdbc_5.1.5.jar/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/controlsfx-8.40.11.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/controlsfx-8.40.9-sources.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/jpdfviewer.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/jPDFViewerFX.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itext-pdfa-5.5.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itext-pdfa-5.5.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itext-pdfa-5.5.3.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itext-xtra-5.5.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itext-xtra-5.5.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itext-xtra-5.5.3.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itextpdf-5.5.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itextpdf-5.5.3-sources.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/itext-5.5.3/itextpdf-5.5.3.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/fxml/jfoenix.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/fxml/fontawesomefx-8.9.jar"/>
+	<classpathentry kind="lib" path="lib_a_charger/com.mysql.jdbc_5.1.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

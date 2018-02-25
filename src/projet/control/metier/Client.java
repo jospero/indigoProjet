@@ -39,7 +39,7 @@ public class Client extends Personne {
 	
 	
 	
-	
+	//les Constructeurs de la class client
 	
 	public Client(String vCode, String vNom, String vPrenom,boolean vCarte_fidelite,Date vDate_creaction,String vadresse,String vcode_postal,String ville,String vtel_fixe,String vmobilis,String vemail,String vremarques) {
 		super(vCode, vNom, vPrenom);
@@ -76,7 +76,7 @@ public class Client extends Personne {
 
 	
 	
-	
+	//les accesseurs de la class cleint (getter et setter)
 	public String getAdresse() {
 		return this.adresse.get();
 	}
@@ -195,7 +195,7 @@ public class Client extends Personne {
 
 	
 	
-	
+	//methode renvoyant une arraylist de client
 	public void lireRecupCRUD()
 	{
 		try {
@@ -224,6 +224,7 @@ public class Client extends Personne {
 		}
 	}
 	
+	//methode renvoyant un hmap de client pour faciliter la recherche dans la couche vue
 	public HashMap<String, Client> liste_Client()
 	{
 		try {
@@ -254,6 +255,7 @@ public class Client extends Personne {
 	return listeClient;
 	}
 	
+	//methode renvoyant une arraylist de client pour l'autcompletion dans la couche vue
 	public ArrayList<Client> liste_Cliente()
 	{
 		try {
@@ -356,31 +358,29 @@ public class Client extends Personne {
 			if(nblignes > 0)
 			{
 				bsuppression =false;
-				JOptionPane.showMessageDialog(null, "Il existe des commandes pour ce client."+"suppression interdite","Resultat",JOptionPane.INFORMATION_MESSAGE);	
+				
 			}
-			else {
-				JOptionPane.showMessageDialog(null,"Aucune commande pour ce client ."+" suppression autorisé.","Resultat",JOptionPane.INFORMATION_MESSAGE);
-			}	
+			
 		} catch (Exception e) {
 			bsuppression =false;
-			JOptionPane.showMessageDialog(null,"Aucune suppession effectué  dans la BD : " +e.getMessage(),
-					"probleme rencontre",JOptionPane.ERROR_MESSAGE);
+			
 		}
 		
 		if(bsuppression==true)
 		{
 			try {
+				conn.setAutoCommit(false);
 				requete="delete from clients where code='"+vcode+"'";
+				String requete1="delete from commandes where code_client='"+vcode+"'";
 				Statement state =conn.createStatement();
-				int nbEnregsup=state.executeUpdate(requete);
+				state.addBatch(requete1);
+				state.addBatch(requete);
+				state.executeBatch();
 				
-				if(nbEnregsup==0)
-				{
-					JOptionPane.showMessageDialog(null, "Aucun enregistrement correspondant"," Resultat",JOptionPane.ERROR_MESSAGE);
-				}
+				
 			} catch (Exception e) {
 				bsuppression =false;
-				JOptionPane.showMessageDialog(null,"Aucune suppression dans la base de donnée");
+				
 			}
 		}
 		

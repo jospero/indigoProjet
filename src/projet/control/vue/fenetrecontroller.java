@@ -43,10 +43,6 @@ public class fenetrecontroller {
 	}
 	
 	
-	public void setMain(Main main) {
-		this.main = main;
-	}
-
 	@FXML
 	private void handleArticle()
 	{
@@ -68,7 +64,6 @@ public class fenetrecontroller {
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
-	
 	}
 	
 	

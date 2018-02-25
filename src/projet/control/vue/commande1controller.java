@@ -31,6 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import projet.control.Main;
 import projet.control.metier.Article;
 import projet.control.metier.Client;
 import projet.control.metier.Commande;
@@ -100,8 +101,12 @@ public class commande1controller implements Initializable {
 	
 	@FXML
 	Label Montant_Affichage;
+	private Main main;
 	
-	
+	private void setMain(Main main)
+	{
+		this.main=main;
+	}
 	
 	
 	private Connection connection=Connection_Base.getconnection();
@@ -126,6 +131,7 @@ public class commande1controller implements Initializable {
 		this.u = u;
 	}
 
+	//methode d'ajout dans le panier
 	@FXML
 	private void Ajouter_Panier()
 	{
@@ -195,6 +201,8 @@ public class commande1controller implements Initializable {
 		this.total_paye = total_paye;
 	}
 
+	
+	//methode permettant de passer une commande
 	@FXML
 	private void Passer_commande()
 	{
@@ -342,6 +350,7 @@ public class commande1controller implements Initializable {
 		
 	}
 	
+	//methode permettant de supprimer un article dans la panier
 	@FXML
 	private void Suppression_Article_Panier()
 	{

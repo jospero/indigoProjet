@@ -1,62 +1,78 @@
 package projet.control.vue;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import projet.control.Main;
 import projet.control.metier.Article;
-import projet.control.metier.Connection_Base;
+import projet.control.metier.Client;
 
-public class articlecontroller implements Initializable  {
+public class articlecontroller   {
 
-	@FXML
-	private TableView<Article> commande_table;
 	
 	@FXML
-	private TableColumn<Article, String> Code;
+	private TableView<Article> tab_article;
 	
 	@FXML
-	private TableColumn<Article, String> Code_Categorie;
+	private TableColumn<String, Client> code_tab;
 	
 	@FXML
-	private TableColumn<Article, String> Designation;
+	private TableColumn<String, Article> code_categorie_tab;
 	
 	@FXML
-	private TableColumn<Article, Integer> Quantite;
-	
+	private TableColumn<String, Article> designation_tab;
 	
 	@FXML
-	private TableColumn<Article, Double> Prix_Unitaire;
+	private TableColumn<Integer, Article> quantite_tab;
 	
-	
+	@FXML
+	private TableColumn<Double, Article> prix_unitaire_tab;
 	
 	
 
-	@FXML private TextField code;
-	@FXML private TextField  code_categorie;
-	@FXML private TextField quantite;
-	@FXML private TextField prix_unitaire ;
-	@FXML private TextField designation;
+	@FXML
+	private TextField code;
+	
+	
+	@FXML
+	private TextField  code_categorie;
+	
+	
+	@FXML
+	private TextField quantite;
+	
+	@FXML
+	private TextField prix_unitaire ;
+	
+	
+	@FXML
+	private TextField designation;
 	
 	private Stage primaryStage;
 	
 	private Article article=new Article();
 	private ArrayList<Article> listeArticle=new Article().getLesEnreg();
-	
-	private Connection connection=Connection_Base.getconnection();
-	private HashMap<String, Article> liste=new Article().lireRecupCRUD();
 	private ObservableList<Article> ArticleData=FXCollections.observableArrayList();
+	
 	
 	
 	
@@ -119,30 +135,6 @@ public class articlecontroller implements Initializable  {
 		prix_unitaire.setText("");
 		designation.setText("");
 	}
+	
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		for(Entry<String, Article> article1:liste.entrySet())
-		{
-			article.setCode(article1.getValue().getCode());
-			article.setCode_catogorie(article1.getValue().getCode_catogorie());
-			article.setDate(article1.getValue().getDate());
-			article.setDesignation(article1.getValue().getDesignation());
-			article.setQuantite(article1.getValue().getQuantite());
-			article.setPrix_unitaire(article1.getValue().getPrix_unitaire());
-			
-			ArticleData.add(article);
-		}
-		Code.setCellValueFactory(cellData -> cellData.getValue().codeProperty());
-		Code_Categorie.setCellValueFactory(cellData -> cellData.getValue().code_categorieProperty());
-		Designation.setCellValueFactory(cellData -> cellData.getValue().designationProperty());
-		Quantite.setCellValueFactory(cellData -> cellData.getValue().quantiteProperty().asObject());
-		Prix_Unitaire.setCellValueFactory(cellData -> cellData.getValue().prix_unitaire().asObject());
-		commande_table.setItems(ArticleData);
-		
-		}
-	
-	
-	
 }

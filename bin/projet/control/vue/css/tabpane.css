@@ -1,0 +1,39 @@
+#tabpane, #tabpane1, #tabpane2, #tabpane3, #tabpane4, #tabpane5
+{
+	-fx-tab-min-height: 7em;
+	-fx-tab-max-height:7em;
+	-fx-tab-min-width:9em;
+	-fx-tab-max-width:9em;
+	-fx-border-width:2 2 0 2;
+}
+
+.tab .tab-label{
+	-fx-background-color: transparent ;
+	-fx-alignment:center ;
+}
+
+.tab{
+	-fx-background-insets:0.0 ;
+	-fx-background-radius:0.0 ;
+	-fx-background-color:none;
+	-fx-pref-width:9em;
+	-fx-padding: 0 10 0 0;
+	
+}
+
+.tab .button{
+	-fx-pref-width:7em;
+	-fx-pref-height:7em;
+}
+
+.tab:hover{
+	-fx-background-insets:0.0 ;
+	-fx-background-radius:0.0 ;
+	-fx-background-color:transparent;
+	-fx-padding: 0 10 0 0;
+}
+
+.tab .button:hover{
+	-fx-pref-width:5em;
+	-fx-pref-height:4em;
+}
